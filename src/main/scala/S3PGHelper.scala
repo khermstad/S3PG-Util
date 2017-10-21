@@ -1,7 +1,5 @@
-import awscala._
 import com.amazonaws.auth.{AWSStaticCredentialsProvider, BasicAWSCredentials}
 import com.amazonaws.services.s3.{AmazonS3, AmazonS3ClientBuilder}
-import s3._
 import com.typesafe.config.ConfigFactory;
 import scala.slick.driver.PostgresDriver.simple._
 
