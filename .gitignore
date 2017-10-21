@@ -3,3 +3,4 @@
 /project/
 /.idea/
 /src/main/Resources/application.conf
+/out/
