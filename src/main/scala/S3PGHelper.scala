@@ -16,16 +16,15 @@ object S3PGHelper {
     val s3Bucket = ConfigFactory.load().getString("s3Bucket")
 
     val awsCreds = new BasicAWSCredentials(awsAccessKey, awsSecretKey)
-    val s3Client: AmazonS3 = AmazonS3ClientBuilder.standard.withCredentials(
+    val s3Client: AmazonS3 = AmazonS3ClientBuilder.standard().withRegion("us-east-1").withCredentials(
       new AWSStaticCredentialsProvider(awsCreds)).build
 
 
-    implicit val s3 = S3.at(Region.US_EAST_1)
 
     var bucketList = s3Client.listObjects(s3Bucket)
     var objectSummaries = bucketList.getObjectSummaries
     while (bucketList.isTruncated()) {
-      bucketList = s3.listNextBatchOfObjects(bucketList)
+      bucketList = s3Client.listNextBatchOfObjects(bucketList)
       objectSummaries.addAll(bucketList.getObjectSummaries)
     }
 
